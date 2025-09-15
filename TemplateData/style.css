@@ -1,890 +1,184 @@
-/* 로컬 폰트 정의 */
-@font-face {
-  font-family: 'DNFBitBit';
-  src: url('../Fonts/DNFBitBitv2.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* 현대적 게이밍 테마 CSS */
-:root {
-  --neon-cyan: #00ffff;
-  --neon-pink: #ff006e;
-  --neon-green: #39ff14;
-  --electric-blue: #0066ff;
-  --dark-bg: #0a0a0a;
-  --card-bg: #1a1a1a;
-  --accent-orange: #ff8500;
-  --white: #ffffff;
-  --gray-light: #cccccc;
-  --gray-medium: #666666;
-  --gray-dark: #333333;
-  --shadow-glow: rgba(0, 255, 255, 0.3);
-  --shadow-pink: rgba(255, 0, 110, 0.3);
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-neon: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
-  --gradient-dark: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
-}
-
-* {
-  box-sizing: border-box;
+body { 
+  padding: 0; 
   margin: 0;
-  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
 }
 
-body {
-  font-family: 'DNFBitBit', monospace;
-  background: var(--dark-bg);
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 0, 110, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(57, 255, 20, 0.05) 0%, transparent 50%);
-  min-height: 100vh;
-  color: var(--white);
-  overflow-x: hidden;
-  position: relative;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    linear-gradient(90deg, transparent 98%, rgba(0, 255, 255, 0.03) 100%),
-    linear-gradient(0deg, transparent 98%, rgba(255, 0, 110, 0.03) 100%);
-  background-size: 50px 50px;
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* 현대적 애니메이션 */
-@keyframes glitch {
-  0%, 100% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-}
-
-@keyframes neonGlow {
-  0%, 100% { 
-    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor; 
-  }
-  50% { 
-    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor; 
-  }
-}
-
-@keyframes slideDown {
-  from { transform: translateY(-100%) scale(0.8); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%) scale(0.8); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-@keyframes pulse3D {
-  0%, 100% { transform: scale(1) rotateX(0deg); }
-  50% { transform: scale(1.05) rotateX(5deg); }
-}
-
-/* 헤더 스타일 */
-.game-header {
-  background: var(--card-bg);
-  border-bottom: 2px solid var(--neon-cyan);
-  box-shadow: 0 0 20px var(--shadow-glow);
-  padding: 1.5rem 0;
-  animation: slideDown 0.8s ease-out;
-  position: relative;
-  overflow: hidden;
-}
-
-.game-header::before {
-  content: '';
+#unity-container { 
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-  animation: scan 4s infinite;
-}
-
-@keyframes scan {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-.header-content {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-}
-
-.game-title {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.game-title i {
-  font-size: 3rem;
-  color: var(--neon-cyan);
-  animation: neonGlow 2s infinite;
-  filter: drop-shadow(0 0 10px var(--neon-cyan));
-}
-
-.game-title h1 {
-  font-family: 'DNFBitBit', monospace;
-  font-size: 3rem;
-  font-weight: 900;
-  color: var(--white);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  text-shadow: 
-    0 0 10px var(--neon-cyan),
-    0 0 20px var(--neon-cyan),
-    0 0 30px var(--neon-cyan);
-  margin: 0;
-}
-
-.subtitle {
-  font-size: 1.1rem;
-  color: var(--gray-light);
-  font-weight: 300;
-  margin-top: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  opacity: 0.8;
-}
-
-.header-controls {
-  display: flex;
-  gap: 1rem;
-}
-
-.control-btn {
-  background: var(--card-bg);
-  border: 2px solid var(--neon-cyan);
-  padding: 1rem;
-  border-radius: 8px;
-  font-size: 1.3rem;
-  color: var(--neon-cyan);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px var(--shadow-glow);
-  position: relative;
-  overflow: hidden;
-}
-
-.control-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.control-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 5px 25px var(--shadow-glow);
-  background: var(--neon-cyan);
-  color: var(--dark-bg);
-  border-color: var(--neon-pink);
-}
-
-.control-btn:hover::before {
-  left: 100%;
-}
-
-/* 메인 게임 영역 */
-.game-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 70vh;
-  padding: 3rem;
-  animation: slideUp 1s ease-out 0.3s both;
-}
-
-#unity-container {
-  position: relative;
-  background: var(--card-bg);
-  border: 2px solid var(--electric-blue);
-  border-radius: 15px;
-  box-shadow: 
-    0 0 30px var(--shadow-glow),
-    inset 0 0 30px rgba(0, 102, 255, 0.1);
-  overflow: hidden;
-  transform-style: preserve-3d;
-}
-
-#unity-container.unity-desktop {
-  position: relative;
-  left: auto;
-  top: auto;
-  transform: none;
-}
-
-#unity-container.unity-mobile {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  border: none;
-}
-
-.game-frame {
-  position: relative;
-  padding: 1.5rem;
-  background: var(--card-bg);
-}
-
-#unity-canvas {
-  background: linear-gradient(135deg, #001122 0%, #003366 50%, #001144 100%);
-  border-radius: 10px;
-  box-shadow: 
-    inset 0 0 50px rgba(0, 255, 255, 0.1),
-    0 0 20px rgba(0, 102, 255, 0.3);
-  display: block;
-  margin: 0 auto;
-  border: 1px solid var(--electric-blue);
-}
-
-.unity-mobile #unity-canvas {
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  border: none;
-}
-
-/* 로딩 화면 스타일 */
-#unity-loading-bar {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 50%; 
+  top: 40%; 
   transform: translate(-50%, -50%);
-  background: rgba(26, 26, 26, 0.95);
-  border: 2px solid var(--neon-cyan);
-  padding: 2.5rem;
-  border-radius: 15px;
-  box-shadow: 
-    0 0 40px var(--shadow-glow),
-    inset 0 0 20px rgba(0, 255, 255, 0.1);
-  text-align: center;
-  backdrop-filter: blur(20px);
 }
 
-.loading-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
+#unity-container.unity-desktop { 
+  left: 50%; 
+  top: 40%; 
+  transform: translate(-50%, -50%);
 }
 
-#unity-logo {
-  width: 100px;
-  height: 100px;
-  background: var(--gradient-neon);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-  animation: pulse3D 2s infinite;
-  position: relative;
-  border: 3px solid var(--neon-cyan);
-  box-shadow: 0 0 30px var(--shadow-glow);
-}
-
-#unity-logo::before {
-  content: '⚡';
-  color: var(--white);
-  text-shadow: 0 0 10px var(--white);
-  filter: drop-shadow(0 0 5px var(--neon-cyan));
-}
-
-.loading-text {
-  font-family: 'DNFBitBit', monospace;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--neon-cyan);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  animation: neonGlow 3s ease-in-out infinite;
-}
-
-#unity-progress-bar-empty {
-  width: 350px;
-  height: 20px;
-  background: var(--dark-bg);
-  border: 2px solid var(--electric-blue);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-  position: relative;
-}
-
-#unity-progress-bar-full {
+#unity-container.unity-mobile { 
+  position: fixed; 
+  width: 100%; 
   height: 100%;
-  background: var(--gradient-neon);
+}
+
+#unity-canvas { 
+  background: #231F20;
   border-radius: 8px;
-  transition: width 0.3s ease;
-  box-shadow: 
-    0 0 20px var(--shadow-glow),
-    inset 0 0 10px rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-#unity-progress-bar-full::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
+.unity-mobile #unity-canvas { 
+  width: 100%; 
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-  animation: progressSweep 2s infinite;
 }
 
-@keyframes progressSweep {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-.loading-percentage {
-  font-family: 'DNFBitBit', monospace;
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--neon-green);
-  text-shadow: 0 0 15px var(--neon-green);
-  letter-spacing: 2px;
-}
-
-/* 푸터 스타일 */
-#unity-footer {
-  margin-top: 1.5rem;
-  background: var(--card-bg);
-  border: 2px solid var(--neon-pink);
-  border-radius: 10px;
-  box-shadow: 0 0 20px var(--shadow-pink);
-  overflow: hidden;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  color: var(--white);
-}
-
-.unity-mobile #unity-footer {
+#unity-loading-bar { 
+  position: absolute; 
+  left: 50%; 
+  top: 50%; 
+  transform: translate(-50%, -50%); 
   display: none;
 }
 
-#unity-logo-title-footer {
-  width: 100px;
-  height: 40px;
-  background: var(--gradient-neon);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'DNFBitBit', monospace;
-  font-weight: 700;
-  color: var(--white);
-  font-size: 0.9rem;
-  text-shadow: 0 0 5px var(--white);
-  border: 1px solid var(--neon-cyan);
+#unity-logo { 
+  width: 154px; 
+  height: 130px; 
+  background: url('unity-logo-dark.png') no-repeat center;
 }
 
-#unity-logo-title-footer::before {
-  content: 'DONGKACHU';
-  letter-spacing: 1px;
+#unity-progress-bar-empty { 
+  width: 141px; 
+  height: 18px; 
+  margin-top: 10px; 
+  margin-left: 6.5px; 
+  background: url('progress-bar-empty-dark.png') no-repeat center;
 }
 
-.game-info {
+#unity-progress-bar-full { 
+  width: 0%; 
+  height: 18px; 
+  margin-top: 10px; 
+  background: url('progress-bar-full-dark.png') no-repeat center;
+}
+
+#unity-footer { 
+  position: relative;
+}
+
+.unity-mobile #unity-footer { 
+  display: none;
+}
+
+#unity-logo-title-footer { 
+  float: left; 
+  width: 102px; 
+  height: 38px; 
+  background: url('unity-logo-title-footer.png') no-repeat center;
+}
+
+#unity-build-title { 
+  float: right; 
+  margin-right: 10px; 
+  line-height: 38px; 
+  font-family: arial; 
+  font-size: 18px;
+}
+
+#unity-fullscreen-button { 
+  cursor: pointer; 
+  float: right; 
+  width: 38px; 
+  height: 38px; 
+  background: url('fullscreen-button.png') no-repeat center;
+}
+
+#unity-warning { 
+  position: absolute; 
+  left: 50%; 
+  top: 5%; 
+  transform: translate(-50%); 
+  background: white; 
+  padding: 10px; 
+  display: none;
+}
+
+/* 조작법 섹션 */
+.controls-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  border-top: 1px solid #ddd;
+}
+
+.controls-section h3 {
   text-align: center;
-  flex-grow: 1;
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  color: #333;
 }
 
-#unity-build-title {
-  font-family: 'DNFBitBit', monospace;
-  font-size: 1.8rem;
-  font-weight: 900;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--neon-pink);
-  text-shadow: 0 0 10px var(--neon-pink);
-}
-
-.version {
-  font-size: 0.9rem;
-  opacity: 0.7;
-  margin-top: 0.5rem;
-  font-family: 'DNFBitBit', monospace;
-  letter-spacing: 1px;
-}
-
-#unity-fullscreen-button {
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  background: var(--card-bg);
-  border: 2px solid var(--neon-green);
-  border-radius: 8px;
+.players {
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  color: var(--neon-green);
-  transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+  gap: 60px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-#unity-fullscreen-button:hover {
-  background: var(--neon-green);
-  color: var(--dark-bg);
-  transform: scale(1.1) rotateZ(180deg);
-  box-shadow: 0 0 25px rgba(57, 255, 20, 0.6);
-}
-
-/* 게임 설명 섹션 */
-.game-instructions {
-  max-width: 1200px;
-  margin: 3rem auto;
-  padding: 0 2rem;
-  animation: slideUp 1s ease-out 0.6s both;
-}
-
-.instructions-content {
-  background: var(--card-bg);
-  border: 2px solid var(--accent-orange);
-  padding: 3rem;
-  border-radius: 20px;
-  box-shadow: 
-    0 0 40px rgba(255, 133, 0, 0.2),
-    inset 0 0 30px rgba(255, 133, 0, 0.05);
+.player {
   text-align: center;
-  position: relative;
-  overflow: hidden;
 }
 
-.instructions-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 133, 0, 0.08), transparent);
-  animation: scan 8s infinite;
+.player h4 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  color: #555;
 }
 
-.instructions-content h3 {
-  font-family: 'DNFBitBit', monospace;
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: var(--accent-orange);
-  margin-bottom: 3rem;
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  text-shadow: 0 0 20px var(--accent-orange);
-}
-
-.players-container {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 3rem;
-  align-items: start;
-  margin-top: 2rem;
-}
-
-.player-section {
-  background: var(--dark-bg);
-  border: 2px solid var(--electric-blue);
-  border-radius: 15px;
-  padding: 2rem;
-  box-shadow: 
-    0 0 30px rgba(0, 102, 255, 0.2),
-    inset 0 0 20px rgba(0, 102, 255, 0.05);
-  position: relative;
-  overflow: hidden;
-}
-
-.player-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 102, 255, 0.1), transparent);
-  transition: left 0.6s ease;
-}
-
-.player-section:hover::before {
-  left: 100%;
-}
-
-.player-section:nth-child(3) {
-  border-color: var(--neon-pink);
-  box-shadow: 
-    0 0 30px var(--shadow-pink),
-    inset 0 0 20px rgba(255, 0, 110, 0.05);
-}
-
-.player-section:nth-child(3)::before {
-  background: linear-gradient(90deg, transparent, rgba(255, 0, 110, 0.1), transparent);
-}
-
-.player-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.player-header i {
-  font-size: 1.8rem;
-  color: var(--neon-cyan);
-}
-
-.player-section:nth-child(3) .player-header i {
-  color: var(--neon-pink);
-}
-
-.player-header h4 {
-  font-family: 'DNFBitBit', monospace;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--white);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0;
-}
-
-.vs-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  min-height: 200px;
-}
-
-.vs-text {
-  font-family: 'DNFBitBit', monospace;
-  font-size: 3rem;
-  font-weight: 900;
-  color: var(--neon-green);
-  text-shadow: 
-    0 0 20px var(--neon-green),
-    0 0 40px var(--neon-green);
-  animation: neonGlow 3s infinite;
-  background: var(--gradient-neon);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  padding: 1rem 2rem;
-  border: 2px solid var(--neon-green);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 100px;
-  box-shadow: 0 0 30px rgba(57, 255, 20, 0.4);
-}
-
-.controls-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-.control-item {
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.control-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-  transition: left 0.4s ease;
-}
-
-.control-item:hover {
-  transform: translateX(5px);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-}
-
-.control-item:hover::before {
-  left: 100%;
-}
-
-.player-section:nth-child(3) .control-item:hover {
-  border-color: var(--neon-pink);
-  box-shadow: 0 0 15px var(--shadow-pink);
-}
-
-.control-item.spike {
-  border-color: var(--accent-orange);
-  background: rgba(255, 133, 0, 0.1);
-  box-shadow: 0 0 10px rgba(255, 133, 0, 0.2);
-}
-
-.control-item.spike:hover {
-  border-color: var(--accent-orange);
-  box-shadow: 0 0 20px rgba(255, 133, 0, 0.4);
-  transform: translateX(8px) scale(1.02);
+  gap: 10px;
+  font-size: 14px;
 }
 
 .key {
-  background: var(--gradient-neon);
-  color: var(--white);
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  font-family: 'DNFBitBit', monospace;
-  font-weight: 700;
-  font-size: 0.9rem;
-  min-width: 45px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 8px;
+  min-width: 50px;
   text-align: center;
-  box-shadow: 
-    0 0 10px var(--shadow-glow),
-    inset 0 0 10px rgba(255, 255, 255, 0.1);
-  border: 1px solid var(--neon-cyan);
-  text-shadow: 0 0 5px var(--white);
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 12px;
 }
 
-.control-item.spike .key {
-  background: linear-gradient(45deg, var(--accent-orange), var(--neon-green));
-  border-color: var(--accent-orange);
-  box-shadow: 
-    0 0 15px rgba(255, 133, 0, 0.4),
-    inset 0 0 10px rgba(255, 255, 255, 0.1);
-}
-
-.action {
-  font-weight: 500;
-  color: var(--gray-light);
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  font-family: 'DNFBitBit', monospace;
-}
-
-/* 페이지 푸터 */
-.game-footer {
-  background: var(--card-bg);
-  border-top: 2px solid var(--neon-pink);
-  color: var(--white);
-  padding: 2.5rem 0;
-  text-align: center;
-  margin-top: 4rem;
-  animation: slideUp 1s ease-out 0.8s both;
-  box-shadow: 0 0 30px var(--shadow-pink);
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.footer-link {
-  color: var(--white);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  background: var(--dark-bg);
-  border: 2px solid var(--electric-blue);
-  transition: all 0.3s ease;
-  font-family: 'DNFBitBit', monospace;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 0 15px rgba(0, 102, 255, 0.3);
-}
-
-.footer-link:hover {
-  background: var(--gradient-neon);
-  color: var(--white);
-  transform: translateY(-3px) scale(1.05);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 5px 25px var(--shadow-glow);
-  text-shadow: 0 0 5px var(--white);
-}
-
-.copyright {
-  font-size: 1rem;
-  opacity: 0.8;
-  margin-top: 1.5rem;
-  font-family: 'DNFBitBit', monospace;
-  letter-spacing: 1px;
-  color: var(--gray-light);
-}
-
-/* 반응형 디자인 */
+/* 반응형 */
 @media (max-width: 768px) {
-  .header-content {
-    padding: 0 1rem;
+  .players {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 30px;
   }
   
-  .game-title h1 {
-    font-size: 2.2rem;
+  .controls-section {
+    padding: 15px;
   }
   
-  .game-main {
-    padding: 1.5rem;
-  }
-  
-  .players-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .vs-divider {
-    order: 2;
-    min-height: 80px;
-  }
-  
-  .vs-text {
-    font-size: 2rem;
-    width: 80px;
-    height: 80px;
-  }
-  
-  .footer-links {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  #unity-canvas {
-    width: 100% !important;
-    height: auto !important;
-  }
-  
-  #unity-loading-bar {
-    padding: 2rem;
-  }
-  
-  #unity-progress-bar-empty {
-    width: 280px;
-  }
-  
-  .instructions-content {
-    padding: 2rem;
-  }
-  
-  .instructions-content h3 {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .game-title h1 {
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-  }
-  
-  .instructions-content {
-    padding: 1.5rem;
-  }
-  
-  .instructions-content h3 {
-    font-size: 1.6rem;
-    gap: 0.5rem;
-  }
-  
-  .player-section {
-    padding: 1.5rem;
-  }
-  
-  .player-header h4 {
-    font-size: 1.2rem;
-  }
-  
-  .vs-text {
-    font-size: 1.5rem;
-    width: 60px;
-    height: 60px;
-  }
-  
-  .control-item {
-    padding: 0.8rem 1rem;
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
-  }
-  
-  .key {
-    padding: 0.5rem 0.8rem;
-    font-size: 0.8rem;
-    min-width: 40px;
-  }
-  
-  .action {
-    font-size: 0.9rem;
-  }
-}
-
-/* 성능 최적화 */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* 고해상도 화면 최적화 */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  #unity-canvas {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+  #unity-container {
+    top: 35%;
   }
 }
